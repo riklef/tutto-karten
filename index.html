@@ -61,6 +61,16 @@
       min-height: 500px; display: flex; flex-direction: column; justify-content: space-between; padding: var(--space-6); border-radius: 1.5rem;
       color: white; box-shadow: var(--shadow-lg); position: sticky; top: var(--space-4);
     }
+    .card-face {
+      width: 100%;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+    }
+    .card-face:disabled {
+      cursor: not-allowed;
+      opacity: 0.85;
+    }
     .card-badge { display: inline-flex; align-self: flex-start; padding: 0.45rem 0.8rem; border-radius: 999px; background: rgba(255,255,255,.18); backdrop-filter: blur(6px); font-size: var(--text-sm); }
     .card-value { font-size: clamp(2.25rem, 1.5rem + 3vw, 4rem); font-weight: 800; line-height: 1; }
     .card-title { font-size: clamp(1.6rem, 1rem + 2vw, 2.6rem); font-weight: 800; }
@@ -138,7 +148,8 @@
     </section>
 
     <section class="deck-layout card">
-      <article class="card-face placeholder" id="cardFace" aria-live="polite">
+      <!-- <article class="card-face placeholder" id="cardFace" aria-live="polite"> -->
+        <button class="card-face placeholder" id="cardFace" aria-live="polite" type="button"></button>
         <div>
           <span class="card-badge" id="cardBadge">Bereit</span>
         </div>
@@ -315,6 +326,11 @@
     }
 
     drawBtn.addEventListener('click', drawCard);
+    cardFaceEl.addEventListener('click', () => {
+      if (state.deck.length > 0) {
+        drawCard();
+      }
+    });
     newGameBtn.addEventListener('click', startNewGame);
     reshuffleBtn.addEventListener('click', reshuffleDeck);
 
